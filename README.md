@@ -5,6 +5,18 @@ Pick an agent, configure it through the UI, install its dependencies, then hit *
 
 ---
 
+## Screenshots
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Agent Detail — Script Editor + Live Console
+![Agent Detail](screenshots/agent-detail.png)
+
+> **To add your own screenshots:** start the app (`uvicorn main:app --reload` + `npm run dev`), take a screenshot of each view, save them as `screenshots/dashboard.png` and `screenshots/agent-detail.png`, then commit them. They will render automatically on GitHub.
+
+---
+
 ## Stack
 
 | Layer    | Tech |
