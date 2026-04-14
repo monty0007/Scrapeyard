@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: #050d12;
+    color: #e2e8f0;
+    font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    text-align: left;
+  }
+
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  button { cursor: pointer; }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(34,211,238,0.18); border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(34,211,238,0.35); }
+}
+
+@layer components {
+  /* ─── Animated background mesh ────────────────────────── */
+  .bg-mesh {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 100% 70% at 15% 5%,  rgba(6,182,212,0.13)  0%, transparent 55%),
+      radial-gradient(ellipse 80%  60% at 85% 85%, rgba(20,184,166,0.10)  0%, transparent 55%),
+      radial-gradient(ellipse 60%  50% at 50% 45%, rgba(16,185,129,0.05)  0%, transparent 55%),
+      #050d12;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .bg-mesh::before {
+    content: '';
+    position: absolute;
+    width: 900px;
+    height: 900px;
+    left: -150px;
+    top: -150px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(6,182,212,0.12) 0%, transparent 65%);
+    animation: orb-drift-a 22s ease-in-out infinite alternate;
+  }
+
+  .bg-mesh::after {
+    content: '';
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    right: -100px;
+    bottom: 10%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(20,184,166,0.10) 0%, transparent 65%);
+    animation: orb-drift-b 28s ease-in-out infinite alternate;
+  }
+
+  /* ─── Cyan accent orb ──────────────────────────────────── */
+  .bg-orb-cyan {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 65%);
+    animation: orb-drift-a 32s ease-in-out infinite alternate-reverse;
+    pointer-events: none;
+  }
+
+  /* ─── Glass utilities ──────────────────────────────────── */
+  .glass {
+    background: rgba(34, 211, 238, 0.04);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+  }
+
+  .glass-heavy {
+    background: rgba(34, 211, 238, 0.07);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+  }
+
+  .glass-dark {
+    background: rgba(5, 13, 18, 0.80);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+
+  /* ─── Gradient text ────────────────────────────────────── */
+  .gradient-text {
+    background: linear-gradient(120deg, #22d3ee 0%, #2dd4bf 50%, #34d399 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ─── Glass input ──────────────────────────────────────── */
+  .input-glass {
+    display: block;
+    width: 100%;
+    background: rgba(34, 211, 238, 0.04);
+    border: 1px solid rgba(34, 211, 238, 0.15);
+    border-radius: 0.6rem;
+    padding: 0.55rem 1rem;
+    color: #e2e8f0;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .input-glass:focus {
+    border-color: rgba(34, 211, 238, 0.6);
+    box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.12);
+  }
+
+  .input-glass::placeholder {
+    color: rgba(148, 163, 184, 0.35);
+  }
+}
+
+@layer utilities {
+  /* ─── Animated pulse dot ───────────────────────────────── */
+  .animate-pulse-dot {
+    animation: pulse-dot 1.4s ease-in-out infinite;
+  }
+}
+
+/* ─── Keyframes (outside layers — global) ──────────────── */
+@keyframes orb-drift-a {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(70px, 55px) scale(1.14); }
+}
+
+@keyframes orb-drift-b {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-55px, -65px) scale(1.10); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.35; transform: scale(0.75); }
+}
